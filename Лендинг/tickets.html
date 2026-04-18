@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Покупка билетов — ЖД Вокзал Стерлитамак</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header" id="header">
+    <div class="container header__container">
+        <a href="index.html" class="header__logo">
+            <div class="logo__icon"><i class="fas fa-train"></i></div>
+            <div class="logo__text">
+                <span class="logo__title">ЖД ВОКЗАЛ</span>
+                <span class="logo__subtitle">СТЕРЛИТАМАК</span>
+            </div>
+        </a>
+        <nav class="header__nav" id="mainNav">
+            <ul class="nav__list">
+                <li><a href="schedule.html" class="nav__link"><i class="fas fa-tv"></i> Табло</a></li>
+                <li><a href="tickets.html" class="nav__link active-page"><i class="fas fa-ticket-alt"></i> Билеты</a></li>
+                <li><a href="index.html#services" class="nav__link"><i class="fas fa-concierge-bell"></i> Услуги</a></li>
+                <li><a href="index.html#news" class="nav__link"><i class="fas fa-newspaper"></i> Новости</a></li>
+                <li><a href="index.html#faq" class="nav__link"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                <li><a href="index.html#contacts" class="nav__link"><i class="fas fa-phone"></i> Контакты</a></li>
+            </ul>
+        </nav>
+        <div class="header__actions">
+            <a href="tel:88001001001" class="header__phone"><i class="fas fa-phone-alt"></i><span>8 (800) 100-10-01</span></a>
+            <button class="btn btn--primary header__login" id="loginBtn"><i class="fas fa-user"></i><span>Войти</span></button>
+            <button class="burger" id="burgerBtn" aria-label="Меню"><span></span><span></span><span></span></button>
+        </div>
+    </div>
+</header>
+
+<!-- ===== СТРАНИЦА: БИЛЕТЫ ===== -->
+<main class="page-hero" style="padding-top:100px;">
+    <div class="page-hero__bg">
+        <img src="https://images.unsplash.com/photo-1520105072097-a42e7fd37e1b?w=1920&q=80" alt="">
+        <div class="page-hero__overlay"></div>
+    </div>
+    <div class="container page-hero__content">
+        <nav class="breadcrumbs">
+            <a href="index.html"><i class="fas fa-home"></i> Главная</a>
+            <span>/</span>
+            <span>Покупка билетов</span>
+        </nav>
+        <h1 class="page-hero__title"><i class="fas fa-ticket-alt"></i> Покупка билетов</h1>
+        <p class="page-hero__subtitle">Заполните форму и оформите билет онлайн</p>
+    </div>
+</main>
+
+<section class="tickets section">
+    <div class="container">
+        <div class="ticket-form-wrapper">
+            <form class="ticket-form" id="ticketForm" novalidate>
+                <!-- Маршрут -->
+                <div class="form-section">
+                    <h3 class="form-section__title"><i class="fas fa-route"></i> Маршрут</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="ticketFrom">Откуда *</label>
+                            <input type="text" id="ticketFrom" name="from" required placeholder="Станция отправления">
+                            <span class="form-error" id="ticketFromError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="ticketTo">Куда *</label>
+                            <input type="text" id="ticketTo" name="to" required placeholder="Станция назначения">
+                            <span class="form-error" id="ticketToError"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="ticketDate">Дата *</label>
+                            <input type="date" id="ticketDate" name="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ticketTime">Время</label>
+                            <select id="ticketTime">
+                                <option value="any">Любое</option>
+                                <option value="morning">Утро 06–12</option>
+                                <option value="day">День 12–18</option>
+                                <option value="evening">Вечер 18–00</option>
+                                <option value="night">Ночь 00–06</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Пассажиры -->
+                <div class="form-section">
+                    <h3 class="form-section__title"><i class="fas fa-users"></i> Пассажиры</h3>
+                    <div class="passengers-counter">
+                        <button type="button" class="counter-btn" id="passMinus">−</button>
+                        <span class="counter-value" id="passengerCount">1</span>
+                        <button type="button" class="counter-btn" id="passPlus">+</button>
+                        <span class="counter-label">взрослых</span>
+                    </div>
+                    <div class="passengers-options">
+                        <label class="checkbox-label"><input type="checkbox" id="hasChild"><span>Есть дети до 10 лет (−50%)</span></label>
+                        <label class="checkbox-label"><input type="checkbox" id="hasBenefit"><span>Есть льготники</span></label>
+                    </div>
+                </div>
+
+                <!-- Класс -->
+                <div class="form-section">
+                    <h3 class="form-section__title"><i class="fas fa-star"></i> Класс обслуживания</h3>
+                    <div class="class-selector">
+                        <label class="class-option active" data-class="platzkart" data-price="450">
+                            <input type="radio" name="travelClass" value="platzkart" checked>
+                            <div class="class-option__icon"><i class="fas fa-bed"></i></div>
+                            <div class="class-option__info">
+                                <span class="class-option__name">Плацкарт</span>
+                                <span class="class-option__desc">Общий вагон, 54 места</span>
+                            </div>
+                            <span class="class-option__price">450 ₽</span>
+                        </label>
+                        <label class="class-option" data-class="kupe" data-price="850">
+                            <input type="radio" name="travelClass" value="kupe">
+                            <div class="class-option__icon"><i class="fas fa-door-closed"></i></div>
+                            <div class="class-option__info">
+                                <span class="class-option__name">Купе</span>
+                                <span class="class-option__desc">Закрытое, 4 места</span>
+                            </div>
+                            <span class="class-option__price">850 ₽</span>
+                        </label>
+                        <label class="class-option" data-class="sv" data-price="1500">
+                            <input type="radio" name="travelClass" value="sv">
+                            <div class="class-option__icon"><i class="fas fa-crown"></i></div>
+                            <div class="class-option__info">
+                                <span class="class-option__name">СВ</span>
+                                <span class="class-option__desc">Люкс, 2 места</span>
+                            </div>
+                            <span class="class-option__price">1 500 ₽</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Контакты -->
+                <div class="form-section">
+                    <h3 class="form-section__title"><i class="fas fa-address-card"></i> Контактные данные</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="passengerName">ФИО *</label>
+                            <input type="text" id="passengerName" name="name" required placeholder="Иванов Иван Иванович">
+                            <span class="form-error" id="nameError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="passengerPhone">Телефон *</label>
+                            <input type="tel" id="passengerPhone" name="phone" required placeholder="+7 (___) ___-__-__">
+                            <span class="form-error" id="phoneError"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="passengerEmail">Email</label>
+                        <input type="email" id="passengerEmail" placeholder="example@mail.ru">
+                    </div>
+                </div>
+
+                <!-- Итого -->
+                <div class="form-total">
+                    <div class="total-row"><span>Стоимость билета:</span><span id="ticketPrice">450 ₽</span></div>
+                    <div class="total-row"><span>Пассажиров:</span><span id="ticketQuantity">1</span></div>
+                    <div class="total-row"><span>Скидка:</span><span id="ticketDiscount">0 ₽</span></div>
+                    <div class="total-row total-row--accent"><span>Итого:</span><span id="totalAmount">450 ₽</span></div>
+                    <button type="submit" class="btn btn--large btn--accent btn--full"><i class="fas fa-credit-card"></i> Оплатить билет</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ПОДВАЛ ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer__grid">
+            <div class="footer__column">
+                <div class="footer__logo"><i class="fas fa-train"></i><span>ЖД ВОКЗАЛ СТЕРЛИТАМАК</span></div>
+                <p class="footer__text">Официальный сайт железнодорожного вокзала г. Стерлитамак.</p>
+                <div class="footer__social">
+                    <a href="#" class="social-link"><i class="fab fa-vk"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer__column">
+                <h4 class="footer__title">Разделы</h4>
+                <ul class="footer__links">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="schedule.html">Табло</a></li>
+                    <li><a href="tickets.html">Билеты</a></li>
+                    <li><a href="index.html#services">Услуги</a></li>
+                    <li><a href="index.html#news">Новости</a></li>
+                </ul>
+            </div>
+            <div class="footer__column">
+                <h4 class="footer__title">Пассажирам</h4>
+                <ul class="footer__links">
+                    <li><a href="#">Правила перевозок</a></li>
+                    <li><a href="#">Багаж и грузы</a></li>
+                    <li><a href="#">Льготы</a></li>
+                    <li><a href="#">Электрички</a></li>
+                    <li><a href="#">Карта сайта</a></li>
+                </ul>
+            </div>
+            <div class="footer__column">
+                <h4 class="footer__title">Контакты</h4>
+                <ul class="footer__contacts">
+                    <li><i class="fas fa-map-marker-alt"></i>г. Стерлитамак, ул. Вокзальная, 1</li>
+                    <li><i class="fas fa-phone-alt"></i><a href="tel:88001001001">8 (800) 100-10-01</a></li>
+                    <li><i class="fas fa-envelope"></i><a href="mailto:info@sterlitamak-rzd.ru">info@sterlitamak-rzd.ru</a></li>
+                </ul>
+                <div class="footer__partners">
+                    <h4 class="footer__title" style="font-size:0.9rem;margin-bottom:6px">Партнёры</h4>
+                    <div class="partners-logos">
+                        <div class="partner-logo">РЖД</div>
+                        <div class="partner-logo">ФПК</div>
+                        <div class="partner-logo">ЦППК</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p>&copy; 2026 Ж/Д Вокзал Стерлитамак. Все права защищены.</p>
+            <p>Сайт создан в учебных целях</p>
+        </div>
+    </div>
+</footer>
+
+<!-- ===== МОДАЛКА: ВХОД ===== -->
+<div class="modal" id="loginModal">
+    <div class="modal__overlay" data-close-modal></div>
+    <div class="modal__content">
+        <button class="modal__close" data-close-modal>&times;</button>
+        <h3 class="modal__title">Вход в личный кабинет</h3>
+        <form id="loginForm">
+            <div class="form-group"><label>Телефон или email</label><input type="text" required placeholder="+7 (___) ___-__-__"></div>
+            <div class="form-group"><label>Пароль</label><input type="password" required placeholder="Введите пароль"></div>
+            <button type="submit" class="btn btn--primary btn--full">Войти</button>
+        </form>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<button class="scroll-top" id="scrollTopBtn" aria-label="Наверх">
+    <i class="fas fa-chevron-up"></i>
+</button>
+</body>
+</html>

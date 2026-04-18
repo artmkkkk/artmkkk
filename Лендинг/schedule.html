@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Табло — ЖД Вокзал Стерлитамак</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header" id="header">
+    <div class="container header__container">
+        <a href="index.html" class="header__logo">
+            <div class="logo__icon"><i class="fas fa-train"></i></div>
+            <div class="logo__text">
+                <span class="logo__title">ЖД ВОКЗАЛ</span>
+                <span class="logo__subtitle">СТЕРЛИТАМАК</span>
+            </div>
+        </a>
+        <nav class="header__nav" id="mainNav">
+            <ul class="nav__list">
+                <li><a href="schedule.html" class="nav__link active-page"><i class="fas fa-tv"></i> Табло</a></li>
+                <li><a href="tickets.html" class="nav__link"><i class="fas fa-ticket-alt"></i> Билеты</a></li>
+                <li><a href="index.html#services" class="nav__link"><i class="fas fa-concierge-bell"></i> Услуги</a></li>
+                <li><a href="index.html#news" class="nav__link"><i class="fas fa-newspaper"></i> Новости</a></li>
+                <li><a href="index.html#faq" class="nav__link"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                <li><a href="index.html#contacts" class="nav__link"><i class="fas fa-phone"></i> Контакты</a></li>
+            </ul>
+        </nav>
+        <div class="header__actions">
+            <a href="tel:88001001001" class="header__phone"><i class="fas fa-phone-alt"></i><span>8 (800) 100-10-01</span></a>
+            <button class="btn btn--primary header__login" id="loginBtn"><i class="fas fa-user"></i><span>Войти</span></button>
+            <button class="burger" id="burgerBtn" aria-label="Меню"><span></span><span></span><span></span></button>
+        </div>
+    </div>
+</header>
+
+<!-- ===== СТРАНИЦА: ТАБЛО ===== -->
+<main class="page-hero" style="padding-top:100px;">
+    <div class="page-hero__bg">
+        <img src="https://images.unsplash.com/photo-1535535112387-56ffe8db21ff?w=1920&q=80" alt="">
+        <div class="page-hero__overlay"></div>
+    </div>
+    <div class="container page-hero__content">
+        <nav class="breadcrumbs">
+            <a href="index.html"><i class="fas fa-home"></i> Главная</a>
+            <span>/</span>
+            <span>Табло</span>
+        </nav>
+        <h1 class="page-hero__title"><i class="fas fa-tv"></i> Табло расписания</h1>
+        <p class="page-hero__subtitle">Актуальное расписание поездов со станции Стерлитамак</p>
+    </div>
+</main>
+
+<section class="schedule section">
+    <div class="container">
+        <div class="schedule__filters">
+            <div class="filter-group">
+                <label>Направление:</label>
+                <select class="filter-input" id="scheduleDirection">
+                    <option value="all">Все направления</option>
+                    <option value="ufa">Уфа</option>
+                    <option value="salavat">Салават</option>
+                    <option value="kumertau">Кумертау</option>
+                    <option value="sibay">Сибай</option>
+                    <option value="beloretsk">Белорецк</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Статус:</label>
+                <select class="filter-input" id="scheduleStatus">
+                    <option value="all">Все статусы</option>
+                    <option value="ontime">По расписанию</option>
+                    <option value="arrived">Прибыл</option>
+                    <option value="delayed">Задерживается</option>
+                </select>
+            </div>
+            <button class="btn btn--secondary" id="applyScheduleFilter"><i class="fas fa-filter"></i> Применить</button>
+            <button class="btn btn--secondary" id="resetScheduleFilter" style="background:#f0f0f0;border-color:#ccc;color:#333"><i class="fas fa-undo"></i> Сбросить</button>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="schedule-table" id="scheduleTable">
+                <thead>
+                    <tr>
+                        <th>№ поезда</th>
+                        <th>Откуда</th>
+                        <th>Куда</th>
+                        <th>Отправление</th>
+                        <th>Прибытие</th>
+                        <th>В пути</th>
+                        <th>Платформа</th>
+                        <th>Статус</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="scheduleBody">
+                    <tr data-direction="ufa" data-status="ontime">
+                        <td><strong>735Э</strong></td><td>Стерлитамак</td><td>Уфа</td>
+                        <td>06:15</td><td>08:30</td><td>2 ч 15 мин</td><td>2</td>
+                        <td><span class="status status--ontime">По расписанию</span></td>
+                        <td><button class="btn-icon detail-btn" data-train="735Э" data-from="Стерлитамак" data-to="Уфа"><i class="fas fa-info-circle"></i></button></td>
+                    </tr>
+                    <tr data-direction="salavat" data-status="arrived">
+                        <td><strong>6521</strong></td><td>Стерлитамак</td><td>Салават</td>
+                        <td>07:40</td><td>09:10</td><td>1 ч 30 мин</td><td>1</td>
+                        <td><span class="status status--arrived">Прибыл</span></td>
+                        <td><button class="btn-icon detail-btn" data-train="6521" data-from="Стерлитамак" data-to="Салават"><i class="fas fa-info-circle"></i></button></td>
+                    </tr>
+                    <tr data-direction="kumertau" data-status="delayed">
+                        <td><strong>6523</strong></td><td>Стерлитамак</td><td>Кумертау</td>
+                        <td>09:25</td><td>11:25</td><td>2 ч 00 мин</td><td>3</td>
+                        <td><span class="status status--delayed">Задерживается</span></td>
+                        <td><button class="btn-icon detail-btn" data-train="6523" data-from="Стерлитамак" data-to="Кумертау"><i class="fas fa-info-circle"></i></button></td>
+                    </tr>
+                    <tr data-direction="ufa" data-status="ontime">
+                        <td><strong>737Э</strong></td><td>Стерлитамак</td><td>Уфа</td>
+                        <td>11:00</td><td>13:15</td><td>2 ч 15 мин</td><td>2</td>
+                        <td><span class="status status--ontime">По расписанию</span></td>
+                        <td><button class="btn-icon detail-btn" data-train="737Э" data-from="Стерлитамак" data-to="Уфа"><i class="fas fa-info-circle"></i></button></td>
+                    </tr>
+                    <tr data-direction="sibay" data-status="ontime">
+                        <td><strong>6525</strong></td><td>Стерлитамак</td><td>Сибай</td>
+                        <td>12:30</td><td>15:40</td><td>3 ч 10 мин</td><td>1</td>
+                        <td><span class="status status--ontime">По расписанию</span></td>
+                        <td><button class="btn-icon detail-btn" data-train="6525" data-from="Стерлитамак" data-to="Сибай"><i class="fas fa-info-circle"></i></button></td>
+                    </tr>
+                    <tr data-direction="ufa" data-status="ontime">
+                        <td><strong>739Э</strong></td><td>Стерлитамак</td><td>Уфа</td>
+                        <td>14:45</td><td>17:00</td><td>2 ч 15 мин</td><td>2</td>
+                        <td><span class="status status--ontime">По расписанию</span></td>
+                        <td><button class="btn-icon detail-btn" data-train="739Э" data-from="Стерлитамак" data-to="Уфа"><i class="fas fa-info-circle"></i></button></td>
+                    </tr>
+                    <tr data-direction="beloretsk" data-status="ontime">
+                        <td><strong>6527</strong></td><td>Стерлитамак</td><td>Белорецк</td>
+                        <td>16:20</td><td>19:45</td><td>3 ч 25 мин</td><td>3</td>
+                        <td><span class="status status--ontime">По расписанию</span></td>
+                        <td><button class="btn-icon detail-btn" data-train="6527" data-from="Стерлитамак" data-to="Белорецк"><i class="fas fa-info-circle"></i></button></td>
+                    </tr>
+                    <tr data-direction="ufa" data-status="ontime">
+                        <td><strong>741Э</strong></td><td>Стерлитамак</td><td>Уфа</td>
+                        <td>18:10</td><td>20:25</td><td>2 ч 15 мин</td><td>2</td>
+                        <td><span class="status status--ontime">По расписанию</span></td>
+                        <td><button class="btn-icon detail-btn" data-train="741Э" data-from="Стерлитамак" data-to="Уфа"><i class="fas fa-info-circle"></i></button></td>
+                    </tr>
+                    <tr data-direction="salavat" data-status="ontime">
+                        <td><strong>6529</strong></td><td>Стерлитамак</td><td>Салават</td>
+                        <td>19:35</td><td>21:05</td><td>1 ч 30 мин</td><td>1</td>
+                        <td><span class="status status--ontime">По расписанию</span></td>
+                        <td><button class="btn-icon detail-btn" data-train="6529" data-from="Стерлитамак" data-to="Салават"><i class="fas fa-info-circle"></i></button></td>
+                    </tr>
+                    <tr data-direction="ufa" data-status="ontime">
+                        <td><strong>743Э</strong></td><td>Стерлитамак</td><td>Уфа</td>
+                        <td>21:00</td><td>23:15</td><td>2 ч 15 мин</td><td>2</td>
+                        <td><span class="status status--ontime">По расписанию</span></td>
+                        <td><button class="btn-icon detail-btn" data-train="743Э" data-from="Стерлитамак" data-to="Уфа"><i class="fas fa-info-circle"></i></button></td>
+                    </tr>
+                    <tr data-direction="kumertau" data-status="ontime">
+                        <td><strong>6531</strong></td><td>Стерлитамак</td><td>Кумертау</td>
+                        <td>22:15</td><td>00:15</td><td>2 ч 00 мин</td><td>3</td>
+                        <td><span class="status status--ontime">По расписанию</span></td>
+                        <td><button class="btn-icon detail-btn" data-train="6531" data-from="Стерлитамак" data-to="Кумертау"><i class="fas fa-info-circle"></i></button></td>
+                    </tr>
+                    <tr data-direction="ufa" data-status="ontime">
+                        <td><strong>745Э</strong></td><td>Стерлитамак</td><td>Уфа</td>
+                        <td>23:30</td><td>01:45</td><td>2 ч 15 мин</td><td>2</td>
+                        <td><span class="status status--ontime">По расписанию</span></td>
+                        <td><button class="btn-icon detail-btn" data-train="745Э" data-from="Стерлитамак" data-to="Уфа"><i class="fas fa-info-circle"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="schedule__note" id="scheduleNote"></p>
+    </div>
+</section>
+
+<!-- ===== ПОДВАЛ ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer__grid">
+            <div class="footer__column">
+                <div class="footer__logo"><i class="fas fa-train"></i><span>ЖД ВОКЗАЛ СТЕРЛИТАМАК</span></div>
+                <p class="footer__text">Официальный сайт железнодорожного вокзала г. Стерлитамак.</p>
+                <div class="footer__social">
+                    <a href="#" class="social-link"><i class="fab fa-vk"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer__column">
+                <h4 class="footer__title">Разделы</h4>
+                <ul class="footer__links">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="schedule.html">Табло</a></li>
+                    <li><a href="tickets.html">Билеты</a></li>
+                    <li><a href="index.html#services">Услуги</a></li>
+                    <li><a href="index.html#news">Новости</a></li>
+                </ul>
+            </div>
+            <div class="footer__column">
+                <h4 class="footer__title">Пассажирам</h4>
+                <ul class="footer__links">
+                    <li><a href="#">Правила перевозок</a></li>
+                    <li><a href="#">Багаж и грузы</a></li>
+                    <li><a href="#">Льготы</a></li>
+                    <li><a href="#">Электрички</a></li>
+                    <li><a href="#">Карта сайта</a></li>
+                </ul>
+            </div>
+            <div class="footer__column">
+                <h4 class="footer__title">Контакты</h4>
+                <ul class="footer__contacts">
+                    <li><i class="fas fa-map-marker-alt"></i>г. Стерлитамак, ул. Вокзальная, 1</li>
+                    <li><i class="fas fa-phone-alt"></i><a href="tel:88001001001">8 (800) 100-10-01</a></li>
+                    <li><i class="fas fa-envelope"></i><a href="mailto:info@sterlitamak-rzd.ru">info@sterlitamak-rzd.ru</a></li>
+                </ul>
+                <div class="footer__partners">
+                    <h4 class="footer__title" style="font-size:0.9rem;margin-bottom:6px">Партнёры</h4>
+                    <div class="partners-logos">
+                        <div class="partner-logo">РЖД</div>
+                        <div class="partner-logo">ФПК</div>
+                        <div class="partner-logo">ЦППК</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p>&copy; 2026 Ж/Д Вокзал Стерлитамак. Все права защищены.</p>
+            <p>Сайт создан в учебных целях</p>
+        </div>
+    </div>
+</footer>
+
+<!-- ===== МОДАЛКИ ===== -->
+<div class="modal" id="trainModal">
+    <div class="modal__overlay" data-close-modal></div>
+    <div class="modal__content">
+        <button class="modal__close" data-close-modal>&times;</button>
+        <h3 class="modal__title" id="trainModalTitle">Информация о поезде</h3>
+        <div id="trainDetailsContent"></div>
+    </div>
+</div>
+
+<div class="modal" id="loginModal">
+    <div class="modal__overlay" data-close-modal></div>
+    <div class="modal__content">
+        <button class="modal__close" data-close-modal>&times;</button>
+        <h3 class="modal__title">Вход в личный кабинет</h3>
+        <form id="loginForm">
+            <div class="form-group"><label>Телефон или email</label><input type="text" required placeholder="+7 (___) ___-__-__"></div>
+            <div class="form-group"><label>Пароль</label><input type="password" required placeholder="Введите пароль"></div>
+            <button type="submit" class="btn btn--primary btn--full">Войти</button>
+        </form>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<button class="scroll-top" id="scrollTopBtn" aria-label="Наверх">
+    <i class="fas fa-chevron-up"></i>
+</button>
+</body>
+</html>
